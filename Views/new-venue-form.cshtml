@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Band Tracker</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Add New Venue</h3>
+        <form action="/venue/new" method="post">
+          <div class="form-group">
+            <label for="venueName">Venue name:</label>
+            <input type="text" name="venueName">
+          </div>
+          <button type="submit">Create Venue</button>
+        </form>
+        <hr>
+        <p><a href="/">Homepage</a></p>
+      </div>
+    </div>
+  </div>

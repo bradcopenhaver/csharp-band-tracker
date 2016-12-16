@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Band Tracker</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <h3>Bands</h3>
+        @if(Model["bands"].Count < 1)
+        {
+          <h5>No bands on record.</h5>
+        }
+        else
+        {
+          <ul>
+          @foreach(var band in Model["bands"])
+          {
+            <li>@band.GetName()</li>
+          }
+          </ul>
+        }
+        <h5><a href="/band/new">Add a new band.</a></h5>
+      </div>
+      <div class="col-md-6">
+        <h3>Venues</h3>
+        @if(Model["venues"].Count < 1)
+        {
+          <h5>No venues on record.</h5>
+        }
+        else
+        {
+          <ul>
+          @foreach(var venue in Model["venues"])
+          {
+            <li>@venue.GetName()</li>
+          }
+          </ul>
+        }
+        <h5><a href="/venue/new">Add a new venue.</a></h5>
+      </div>
+    </div>
+  </div>
