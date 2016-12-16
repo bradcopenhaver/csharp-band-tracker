@@ -83,5 +83,22 @@ namespace BandTracker
       //Assert
       Assert.Equal(expectedResult, result);
     }
+    [Fact]
+    public void AddGetBands_AddsAndGetsBandsForVenue_true()
+    {
+      //Arrange
+      Venue newVenue = new Venue("The Waypost");
+      Band newBand = new Band("The Heggs");
+      Band newBand1 = new Band("Local H");
+      newVenue.Save();
+      newBand.Save();
+      newBand1.Save();
+      List<Band> expectedResult = new List<Band>{newBand};
+      //Act
+      newVenue.AddBand(newBand.GetId());
+      List<Band> result = newVenue.GetBands();
+      //Assert
+      Assert.Equal(expectedResult, result);
+    }
   }
 }
