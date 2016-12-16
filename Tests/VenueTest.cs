@@ -42,6 +42,8 @@ namespace BandTracker
       newVenue.Save();
       List<Venue> allVenues = Venue.GetAll();
       //Assert
+      Console.WriteLine(newVenue.GetName() + " " + newVenue.GetId());
+      Console.WriteLine(allVenues[0].GetName() + " " + allVenues[0].GetId());
       Assert.Equal(newVenue, allVenues[0]);
     }
     [Fact]
