@@ -72,10 +72,11 @@ _This program will..._
 4. Navigate to the repository in terminal and run the command >dnu restore
 5. In the same location, create a local server by running the command >dnx kestrel
 6. Open a web browser and navigate to localhost:5004 to view the app.
+7. Tests can be run with the command >dnx test
 
 ## Known Bugs
 
-None yet.
+None yet, mostly due to lack of testing.
 
 ## Possible future version features
 
