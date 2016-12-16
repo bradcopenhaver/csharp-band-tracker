@@ -24,5 +24,25 @@ namespace BandTracker
       //Assert
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Equals_EqualOverride_True()
+    {
+      //Arrange and Act
+      Band firstBand = new Band("Three Days Grace");
+      Band secondBand = new Band("Three Days Grace");
+      //Assert
+      Assert.Equal(firstBand,secondBand);
+    }
+    [Fact]
+    public void Save_SavesBandToDatabase_true()
+    {
+      //Arrange
+      Band newBand = new Band("Sublime");
+      //Act
+      newBand.Save();
+      List<Band> allBands = Band.GetAll();
+      //Assert
+      Assert.Equal(newBand, allBands[0]);
+    }
   }
 }

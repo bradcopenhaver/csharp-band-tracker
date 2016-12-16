@@ -24,5 +24,25 @@ namespace BandTracker
       //Assert
       Assert.Equal(0, result);
     }
+    [Fact]
+    public void Equals_EqualOverride_True()
+    {
+      //Arrange and Act
+      Venue firstVenue = new Venue("Wonder Ballroom");
+      Venue secondVenue = new Venue("Wonder Ballroom");
+      //Assert
+      Assert.Equal(firstVenue,secondVenue);
+    }
+    [Fact]
+    public void Save_SavesVenueToDatabase_true()
+    {
+      //Arrange
+      Venue newVenue = new Venue("Doug Fir");
+      //Act
+      newVenue.Save();
+      List<Venue> allVenues = Venue.GetAll();
+      //Assert
+      Assert.Equal(newVenue, allVenues[0]);
+    }
   }
 }

@@ -5,7 +5,7 @@ using Nancy.Owin;
 using Nancy;
 using Nancy.ViewEngines.Razor;
 
-namespace HairSalon
+namespace BandTracker
 {
   public static class DBConfiguration
   {
