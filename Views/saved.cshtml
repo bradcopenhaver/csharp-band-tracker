@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Band Tracker</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>You have succesfully saved a record.</h4>
+        <h5><a href='/band/@Model["band"].GetId()'>@Model["band"].GetName()</a> performed at <a href='/venue/@Model["venue"].GetId()'>@Model["venue"].GetName()</a>.
+        <hr>
+        <p><a href="/">Homepage</a></p>
+      </div>
+    </div>
+  </div>

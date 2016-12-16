@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Band Tracker</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>@Model["venue"].GetName()</h3>
+        @if(Model["venueBands"].Count > 0)
+        {
+          <h4>These bands have played at this venue:</h4>
+          <ul>
+          @foreach(var band in Model["venueBands"])
+          {
+            <li><a href="/band/@band.GetId()">@band.GetName()</a></li>
+          }
+          </ul>
+        }
+        <form action='/venue/@Model["venue"].GetId()/add-band' method="post">
+          <h5>Add a band that has played at this venue:</h5>
+          <select name="bandId">
+            @foreach(var band in Model["bands"])
+            {
+              <option value=@band.GetId()>@band.GetName()</option>
+            }
+          </select>
+          <button type="submit">Add Band</button>
+        </form>
+        <hr>
+        <p><a href="/">Homepage</a></p>
+      </div>
+    </div>
+  </div>
