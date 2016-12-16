@@ -13,13 +13,18 @@
       <div class="col-md-12">
         <h3>Edit a Venue Record</h3>
         <h5>Current Name: @Model.GetName()</h5>
-        <form action='/band/@Model.GetId()/edit' method="post">
+        <form action='/venue/@Model.GetId()' method="post">
           <input type="hidden" name="_method" value="PATCH">
           <div class="form-group">
             <label for="newName">New name:</label>
             <input type="text" name="newName">
           </div>
           <button type="submit">Edit Venue</button>
+        </form>
+        <h3>-OR-</h3>
+        <form action="/venue/@Model.GetId()" method="post">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit" class="btn btn-danger">Delete this Venue</button>
         </form>
         <hr>
         <p><a href="/">Homepage</a></p>

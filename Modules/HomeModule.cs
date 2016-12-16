@@ -75,15 +75,25 @@ namespace BandTracker
         Venue currentVenue = Venue.Find(parameters.id);
         return View["edit-venue-form.cshtml", currentVenue];
       };
-      Patch["/band/{id}/edit"] = parameters => {
+      Patch["/band/{id}"] = parameters => {
         Band currentBand = Band.Find(parameters.id);
         currentBand.Edit(Request.Form["newName"]);
         return View["edit-success.cshtml", currentBand];
       };
-      Patch["/venue/{id}/edit"] = parameters => {
+      Patch["/venue/{id}"] = parameters => {
         Venue currentVenue = Venue.Find(parameters.id);
         currentVenue.Edit(Request.Form["newName"]);
         return View["edit-success.cshtml", currentVenue];
+      };
+      Delete["/band/{id}"] = parameters => {
+        Band currentBand = Band.Find(parameters.id);
+        currentBand.Delete();
+        return View["delete-success.cshtml", currentBand];
+      };
+      Delete["/venue/{id}"] = parameters => {
+        Venue currentVenue = Venue.Find(parameters.id);
+        currentVenue.Delete();
+        return View["delete-success.cshtml", currentVenue];
       };
     }
   }
