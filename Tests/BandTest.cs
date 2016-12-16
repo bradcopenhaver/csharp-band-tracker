@@ -44,5 +44,44 @@ namespace BandTracker
       //Assert
       Assert.Equal(newBand, allBands[0]);
     }
+    [Fact]
+    public void Find_FindsBandById_true()
+    {
+      //Arrange
+      Band newBand = new Band("Wilson Phillips");
+      newBand.Save();
+      //Act
+      Band foundBand = Band.Find(newBand.GetId());
+      //Assert
+      Assert.Equal(newBand, foundBand);
+    }
+    [Fact]
+    public void Edit_ChangesName_true()
+    {
+      //Arrange
+      Band newBand = new Band("Three Dog Night");
+      newBand.Save();
+      //Act
+      newBand.Edit("Dog's Eye View");
+      Band foundBand = Band.Find(newBand.GetId());
+
+      //Assert
+      Assert.Equal("Dog's Eye View", foundBand.GetName());
+    }
+    [Fact]
+    public void Delete_DeletesBandFromDB_true()
+    {
+      //Arrange
+      Band newBand1 = new Band("KISS");
+      Band newBand2 = new Band("Metallica");
+      newBand1.Save();
+      newBand2.Save();
+      //Act
+      newBand1.Delete();
+      List<Band> result = Band.GetAll();
+      List<Band> expectedResult = new List<Band> {newBand2};
+      //Assert
+      Assert.Equal(expectedResult, result);
+    }
   }
 }

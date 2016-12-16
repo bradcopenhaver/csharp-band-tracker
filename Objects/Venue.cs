@@ -66,6 +66,30 @@ namespace BandTracker.Objects
 
       return allVenues;
     }
+    public static Venue Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM venues WHERE id = @VenueId;", conn);
+
+      cmd.Parameters.AddWithValue("@VenueId", id.ToString());
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundVenueId = 0;
+      string foundVenueName = null;
+
+      while(rdr.Read())
+      {
+        foundVenueId = rdr.GetInt32(0);
+        foundVenueName = rdr.GetString(1);
+      }
+      Venue foundVenue = new Venue(foundVenueName, foundVenueId);
+      if(rdr != null) rdr.Close();
+      if(conn != null) conn.Close();
+
+      return foundVenue;
+    }
     public void Save()
     {
       SqlConnection conn = DB.Connection();
@@ -83,6 +107,35 @@ namespace BandTracker.Objects
       }
       if(rdr != null) rdr.Close();
       if(conn != null) conn.Close();
+    }
+    public void Edit(string newName)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @NewName OUTPUT INSERTED.name WHERE id = @VenueId;", conn);
+      cmd.Parameters.AddWithValue("@NewName", newName);
+      cmd.Parameters.AddWithValue("VenueId", _id);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while (rdr.Read())
+      {
+        this._name = rdr.GetString(0);
+      }
+      if(rdr != null) rdr.Close();
+      if(conn != null) conn.Close();
+    }
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM venues WHERE id = @VenueId; DELETE FROM bands_venues WHERE venue_id = @VenueId;", conn);
+      cmd.Parameters.AddWithValue("@VenueId", _id);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null) conn.Close();
     }
   }
 }

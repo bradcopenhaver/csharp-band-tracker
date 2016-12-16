@@ -66,6 +66,30 @@ namespace BandTracker.Objects
 
       return allBands;
     }
+    public static Band Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM bands WHERE id = @BandId;", conn);
+
+      cmd.Parameters.AddWithValue("@BandId", id.ToString());
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundBandId = 0;
+      string foundBandName = null;
+
+      while(rdr.Read())
+      {
+        foundBandId = rdr.GetInt32(0);
+        foundBandName = rdr.GetString(1);
+      }
+      Band foundBand = new Band(foundBandName, foundBandId);
+      if(rdr != null) rdr.Close();
+      if(conn != null) conn.Close();
+
+      return foundBand;
+    }
     public void Save()
     {
       SqlConnection conn = DB.Connection();
@@ -83,6 +107,35 @@ namespace BandTracker.Objects
       }
       if(rdr != null) rdr.Close();
       if(conn != null) conn.Close();
+    }
+    public void Edit(string newName)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("UPDATE bands SET name = @NewName OUTPUT INSERTED.name WHERE id = @BandId;", conn);
+      cmd.Parameters.AddWithValue("@NewName", newName);
+      cmd.Parameters.AddWithValue("BandId", _id);
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while (rdr.Read())
+      {
+        this._name = rdr.GetString(0);
+      }
+      if(rdr != null) rdr.Close();
+      if(conn != null) conn.Close();
+    }
+    public void Delete()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("DELETE FROM bands WHERE id = @BandId; DELETE FROM bands_venues WHERE band_id = @BandId;", conn);
+      cmd.Parameters.AddWithValue("@BandId", _id);
+      cmd.ExecuteNonQuery();
+
+      if (conn != null) conn.Close();
     }
   }
 }

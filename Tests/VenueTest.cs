@@ -44,5 +44,44 @@ namespace BandTracker
       //Assert
       Assert.Equal(newVenue, allVenues[0]);
     }
+    [Fact]
+    public void Find_FindsVenueById_true()
+    {
+      //Arrange
+      Venue newVenue = new Venue("CBGB");
+      newVenue.Save();
+      //Act
+      Venue foundVenue = Venue.Find(newVenue.GetId());
+      //Assert
+      Assert.Equal(newVenue, foundVenue);
+    }
+    [Fact]
+    public void Edit_ChangesName_true()
+    {
+      //Arrange
+      Venue newVenue = new Venue("CBGBBQ");
+      newVenue.Save();
+      //Act
+      newVenue.Edit("CBGB");
+      Venue foundVenue = Venue.Find(newVenue.GetId());
+
+      //Assert
+      Assert.Equal("CBGB", foundVenue.GetName());
+    }
+    [Fact]
+    public void Delete_DeletesVenueFromDB_true()
+    {
+      //Arrange
+      Venue newVenue1 = new Venue("Madison Square Garden");
+      Venue newVenue2 = new Venue("The Goodfoot");
+      newVenue1.Save();
+      newVenue2.Save();
+      //Act
+      newVenue1.Delete();
+      List<Venue> result = Venue.GetAll();
+      List<Venue> expectedResult = new List<Venue> {newVenue2};
+      //Assert
+      Assert.Equal(expectedResult, result);
+    }
   }
 }
