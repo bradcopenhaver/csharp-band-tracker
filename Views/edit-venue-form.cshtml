@@ -6,7 +6,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1>Band Tracker</h1>
+        <div class="well">
+          <h1>Band Tracker</h1>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -17,11 +19,11 @@
           <input type="hidden" name="_method" value="PATCH">
           <div class="form-group">
             <label for="newName">New name:</label>
-            <input type="text" name="newName">
+            <input type="text" name="newName" required>
           </div>
-          <button type="submit">Edit Venue</button>
+          <button type="submit" class="btn btn-primary">Edit Venue</button>
         </form>
-        <h3>-OR-</h3>
+        <h4>-OR-</h4>
         <form action="/venue/@Model.GetId()" method="post">
           <input type="hidden" name="_method" value="DELETE">
           <button type="submit" class="btn btn-danger">Delete this Venue</button>

@@ -6,11 +6,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1>Band Tracker</h1>
+        <div class="well">
+          <h1>Band Tracker</h1>
+        </div>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-offset-1 col-md-4">
         <h3>Bands</h3>
         @if(Model["bands"].Count < 1)
         {
@@ -25,9 +27,9 @@
           }
           </ul>
         }
-        <h5><a href="/band/new">Add a new band.</a></h5>
+        <h5><a href="/band/new">Add a new band</a></h5>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-offset-2 col-md-4">
         <h3>Venues</h3>
         @if(Model["venues"].Count < 1)
         {
@@ -42,7 +44,7 @@
           }
           </ul>
         }
-        <h5><a href="/venue/new">Add a new venue.</a></h5>
+        <h5><a href="/venue/new">Add a new venue</a></h5>
       </div>
     </div>
   </div>

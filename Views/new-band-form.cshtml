@@ -6,7 +6,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h1>Band Tracker</h1>
+        <div class="well">
+          <h1>Band Tracker</h1>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -15,9 +17,9 @@
         <form action="/band/new" method="post">
           <div class="form-group">
             <label for="bandName">Band name:</label>
-            <input type="text" name="bandName">
+            <input type="text" name="bandName" required>
           </div>
-          <button type="submit">Create Band</button>
+          <button type="submit" class="btn btn-primary">Create Band</button>
         </form>
         <hr>
         <p><a href="/">Homepage</a></p>
