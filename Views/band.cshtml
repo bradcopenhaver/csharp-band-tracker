@@ -12,6 +12,8 @@
     <div class="row">
       <div class="col-md-12">
         <h3>@Model["band"].GetName()</h3>
+        <p><a href='/band/@Model["band"].GetId()/edit'>Edit this band.</a></p>
+        <hr>
         @if(Model["bandVenues"].Count > 0)
         {
           <h4>This band has played at these venues:</h4>

@@ -67,6 +67,24 @@ namespace BandTracker
         model.Add("venue", currentVenue);
         return View["saved.cshtml", model];
       };
+      Get["/band/{id}/edit"] = parameters => {
+        Band currentBand = Band.Find(parameters.id);
+        return View["edit-band-form.cshtml", currentBand];
+      };
+      Get["/venue/{id}/edit"] = parameters => {
+        Venue currentVenue = Venue.Find(parameters.id);
+        return View["edit-venue-form.cshtml", currentVenue];
+      };
+      Patch["/band/{id}/edit"] = parameters => {
+        Band currentBand = Band.Find(parameters.id);
+        currentBand.Edit(Request.Form["newName"]);
+        return View["edit-success.cshtml", currentBand];
+      };
+      Patch["/venue/{id}/edit"] = parameters => {
+        Venue currentVenue = Venue.Find(parameters.id);
+        currentVenue.Edit(Request.Form["newName"]);
+        return View["edit-success.cshtml", currentVenue];
+      };
     }
   }
 }
